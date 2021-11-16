@@ -1,0 +1,29 @@
+.pictures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .picture {
+    padding: 1rem;
+    width: 400px;
+    .imageContainer {
+      //當Container裡面的image的高度超過conatiner的高度時, img超過的部份就會被隱藏
+      overflow: hidden;
+      height: 40vh;
+      margin: 0.25rem 0rem;
+      img {
+        //width/height 100%, 表示此圖在container要佔多少的百分比來顯示
+        width: 100%;
+        height: 100%;
+        //將整個範圍填滿, 但不改變圖的比例, 可參考以下連結的object-fit介紹
+        //https://tools.wingzero.tw/article/sn/61
+        object-fit: cover;
+        transition: all 0.3s ease;
+        &:hover {
+          transform: scale(1.25);
+        }
+      }
+    }
+  }
+}

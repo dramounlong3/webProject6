@@ -1,0 +1,16 @@
+nav {
+  background-color: rgb(82, 170, 182);
+  ul {
+    display: flex;
+    justify-content: end;
+    margin-right: 3rem;
+    li {
+      padding: 0.5rem 1rem;
+      //雖然在Nav.js a tage都被改寫為Link, 但css要設定的部分還是要寫a
+      a {
+        font-size: 1.5rem;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.search {
+  display: flex;
+  justify-content: center; //控制與direction 水平方向的位移
+  align-items: center; //控制與direction 垂直方向的位移
+  padding: 3rem 0rem;
+
+  input,
+  button {
+    font-size: 2rem;
+    padding: 0.25rem;
+    border: 3px solid rgb(6, 70, 78);
+    margin: 0rem 0.25rem;
+  }
+  button {
+    background-color: rgb(36, 71, 108);
+    color: white;
+    border-radius: 5%;
+  }
+}
