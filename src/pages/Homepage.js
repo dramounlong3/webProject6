@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Picture from "../components/Picture";
 import Search from "../components/Search";
+import { v4 as uuidv4 } from "uuid";
 
 const Homepage = () => {
-  const photoNum = 16;
+  const photoNum = 100;
   const [input, setInput] = useState("");
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
@@ -42,7 +43,7 @@ const Homepage = () => {
     //這裡也要在每一次按load more後, 將page+1, 也就是說page=2時載入photo後, 在state看已經變3了(但內容是第二頁的photo), 下一次再按load more, 就會從第3頁開始載入, 但state隨後立刻變4, 依此類推...
     //無論是initialURL還是searchURL, 都要將page=變數值, 才會一直換頁
     let newURL;
-    if (/*input*/ currentSearch == "") {
+    if (/*input*/ currentSearch === "") {
       newURL = `https://api.pexels.com/v1/curated?per_page=${photoNum}&page=${page}`;
     } else {
       newURL = `https://api.pexels.com/v1/search?query=${
@@ -62,7 +63,6 @@ const Homepage = () => {
     //讓原本的data array 接上新的photo array
     setData(data.concat(parseData.photos));
     setPage(page + 1);
-    console.log("in load.");
   }
 
   //fetch data with initialURL when the page loads up
@@ -71,12 +71,12 @@ const Homepage = () => {
   // }, []);
 
   useEffect(() => {
-    if (/*input*/ currentSearch == "") {
+    if (/*input*/ currentSearch === "") {
       search(initialURL);
     } else {
       search(searchURL);
     }
-  }, [currentSearch, num]);
+  }, [currentSearch, num, initialURL, searchURL]);
 
   const loadpage = () => {
     return (
@@ -95,7 +95,7 @@ const Homepage = () => {
           {/*JS的邏輯運算子不一定是傳回true或false, 詳請參考下面的解釋 */}
           {data &&
             data.map((d) => {
-              return <Picture data={d} />;
+              return <Picture data={d} key={uuidv4()} />;
             })}
         </div>
         <div className="morePicture">
@@ -133,7 +133,7 @@ const Homepage = () => {
   if (num < 1) {
     return loadpage();
   } else {
-    if (!data || data.length == 0) {
+    if (!data || data.length === 0) {
       return (
         <div style={{ minHeight: "100vh" }}>
           {/*Click search button in Search component to execute the arrow function with searchURL to call the search function in Homepage component*/}
